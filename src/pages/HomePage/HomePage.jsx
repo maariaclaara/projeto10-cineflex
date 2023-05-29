@@ -1,31 +1,57 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import axios from "axios";
+import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 export default function HomePage() {
+
+    const [movies, setMovies] = useState([]);
+
+    useEffect( () => {
+
+        const URL = 'https://mock-api.driven.com.br/api/v8/cineflex/movies';
+        const promiseMovies = axios.get(URL);
+
+        promiseMovies.then(response => {
+            setMovies(response.data)
+        })
+        
+        promiseMovies.catch(error => {
+            setMovies(error.response.data)
+        })
+        
+
+    }, []);
+
+
+    if (movies.length === 0){
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <PageContainer>
             Selecione o filme
 
             <ListContainer>
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
 
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
+                {movies.map((movie) => (  
 
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
+                    <MovieContainer key={movie.id}>
+                        <Link to={`/sessoes/${movie.id}`}>
+                            <img src={movie.posterURL} alt={movie.title} /> 
+                        </Link>                
+                    </MovieContainer>
+                ))}
+                       
             </ListContainer>
 
         </PageContainer>
     )
 }
+
 
 const PageContainer = styled.div`
     display: flex;
@@ -58,4 +84,7 @@ const MovieContainer = styled.div`
         width: 130px;
         height: 190px;
     }
+    &:hover{
+        background-color: yellow;
+      }
 `
