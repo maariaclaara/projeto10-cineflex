@@ -125,13 +125,15 @@ function formSeats(e) {
 
             <FormPage setName={setName} setCpf={setCpf} formSeats={formSeats}/>
 
-            <FooterContainer ata-test="footer">
+            <FooterContainer>
+                <div data-test="footer">
                 <div>
                     <img src={seats.movie.posterURL} alt={seats.movie.title} />
                 </div>
                 <div>
                     <p>{seats.movie.title}</p>
                     <p>{seats.day.weekday} - {seats.name}</p>
+                </div>
                 </div>
             </FooterContainer>
 
