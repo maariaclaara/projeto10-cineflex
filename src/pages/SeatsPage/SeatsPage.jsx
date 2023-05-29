@@ -129,7 +129,7 @@ function formSeats(e) {
                 <div data-test="footer">
                     <img src={seats.movie.posterURL} alt={seats.movie.title} />
                 </div>
-                <div>
+                <div data-test="footer">
                     <p>{seats.movie.title}</p>
                     <p>{seats.day.weekday} - {seats.name}</p>
                 </div>
