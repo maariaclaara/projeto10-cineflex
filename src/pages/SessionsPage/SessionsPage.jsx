@@ -101,7 +101,7 @@ const ButtonsContainer = styled.div`
         cursor: pointer;
         
         &:hover{
-            background-color: yellow;
+            background-color: lightblue;
         }
     }
 

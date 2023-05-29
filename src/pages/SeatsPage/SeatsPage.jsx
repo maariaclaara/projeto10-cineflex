@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Loading from "../../components/Loading";
+import FormPage from "./FormPage";
 
 
-export default function SeatsPage() {
+export default function SeatsPage({ setData }) {
 
     const [seats, setSeats] = useState([]);
     const [selected, setSelected] = useState([]);
-    
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
     const {idSession} = useParams();
+    const changePage = useNavigate();
     
 
     useEffect( () => {
@@ -53,6 +56,31 @@ export default function SeatsPage() {
 }
 
 
+function formSeats(e) {
+
+    e.preventDefault();
+
+    if (selected.length === 0) {
+      alert("Por favor, selecione um assento!");
+      return;
+    }
+
+    const sucessPage = { ids: selected.map((e) => e.id), name, cpf };
+    const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
+    const promiseSucess = axios.post(URL, sucessPage);
+
+    promiseSucess.then((response) => {
+      const data = { name, cpf, seats, selected };
+      setData(data);
+      changePage("/sucesso");
+    });
+
+    promiseSucess.catch((error) =>
+      console.log(error.response.data.message)
+    );
+  }
+
+
     return (
         <PageContainer>
             Selecione o(s) assento(s)
@@ -77,7 +105,6 @@ export default function SeatsPage() {
 
                     </SeatItem> 
                 ))}
-
             </SeatsContainer>
 
             <CaptionContainer>
@@ -95,15 +122,7 @@ export default function SeatsPage() {
                 </CaptionItem>
             </CaptionContainer>
 
-            <FormContainer>
-                Nome do Comprador:
-                <input placeholder="Digite seu nome..." />
-
-                CPF do Comprador:
-                <input placeholder="Digite seu CPF..." />
-
-                <button>Reservar Assento(s)</button>
-            </FormContainer>
+            <FormPage setName={setName} setCpf={setCpf} formSeats={formSeats}/>
 
             <FooterContainer>
                 <div>
@@ -140,20 +159,7 @@ const SeatsContainer = styled.div`
     justify-content: center;
     margin-top: 20px;
 `
-const FormContainer = styled.div`
-    width: calc(100vw - 40px); 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 20px 0;
-    font-size: 18px;
-    button {
-        align-self: center;
-    }
-    input {
-        width: calc(100vw - 60px);
-    }
-`
+
 const CaptionContainer = styled.div`
     display: flex;
     flex-direction: row;

@@ -85,6 +85,6 @@ const MovieContainer = styled.div`
         height: 190px;
     }
     &:hover{
-        background-color: yellow;
+        background-color: lightblue;
       }
 `

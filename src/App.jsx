@@ -1,12 +1,16 @@
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import HomePage from "./pages/HomePage/HomePage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 export default function App() {
+
+    const [data, setData] = useState({});
+
     return (
         <>
            <NavContainer>CINEFLEX</NavContainer>
@@ -15,8 +19,8 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/sessoes/:idMovie" element={<SessionsPage />} />
-                    <Route path="/assentos/:idSession" element={<SeatsPage />} /> 
-                    {/* <SuccessPage /> */}
+                    <Route path="/assentos/:idSession" element={<SeatsPage setData={setData} />} /> 
+                    <Route path="/sucesso" element={<SuccessPage data={data} />} />
                 </Routes>
             </BrowserRouter>
             
