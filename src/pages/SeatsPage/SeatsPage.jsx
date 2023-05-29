@@ -90,6 +90,7 @@ function formSeats(e) {
 
                     <SeatItem
                     key={seats.id}
+                    data-test="seat"
                     onClick={() => selectSeats(seats)}
                     changeColor={
                         selected.includes(seats)
@@ -125,7 +126,7 @@ function formSeats(e) {
             <FormPage setName={setName} setCpf={setCpf} formSeats={formSeats}/>
 
             <FooterContainer>
-                <div>
+                <div data-test="footer">
                     <img src={seats.movie.posterURL} alt={seats.movie.title} />
                 </div>
                 <div>

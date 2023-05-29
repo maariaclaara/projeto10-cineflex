@@ -11,12 +11,14 @@ export default function SuccessPage({ data }) {
             <h1>Pedido feito <br /> com sucesso!</h1>
 
             <TextContainer>
+                <div data-test="movie-info"></div>
                 <strong><p>Filme e sessão</p></strong>
                 <p>{seats.movie.title}</p>
                 <p>{seats.day.date} - {seats.name}</p>
             </TextContainer>
 
             <TextContainer>
+                <div data-test="seats-info"></div>
                 <strong><p>Ingressos</p></strong>
 
                 {selected.map((e) => (
@@ -25,13 +27,14 @@ export default function SuccessPage({ data }) {
             </TextContainer>
 
             <TextContainer>
+                <div data-test="client-info"></div>
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {name}</p>
                 <p>CPF: {cpf}</p>
             </TextContainer>
 
             <Link to="/">
-                <button>Voltar para Home</button>
+                <button data-test="go-home-btn">Voltar para Home</button>
             </Link>
             
         </PageContainer>
