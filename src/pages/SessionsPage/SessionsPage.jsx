@@ -55,11 +55,11 @@ export default function SessionsPage() {
             ))} 
             </div>                 
 
-            <FooterContainer>
-                <div data-test="footer">
+            <FooterContainer data-test="footer">
+                <div>
                     <img src={sessions.posterURL} alt={sessions.title} />
                 </div>
-                <div data-test="footer">
+                <div>
                     <p>{sessions.title}</p>
                 </div>
             </FooterContainer>
