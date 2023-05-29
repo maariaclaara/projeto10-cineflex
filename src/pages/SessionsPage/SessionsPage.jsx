@@ -34,10 +34,10 @@ export default function SessionsPage() {
         <PageContainer>
             Selecione o horário
 
-            <div data-test="movie-day">           
+            <div>           
             {sessions.days.map((sessions) => ( 
 
-                <SessionContainer key={sessions.id}>
+                <SessionContainer key={sessions.id} data-test="movie-day">
 
                      {sessions.weekday} - {sessions.date}
 
