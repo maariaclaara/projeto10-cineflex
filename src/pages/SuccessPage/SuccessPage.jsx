@@ -11,26 +11,30 @@ export default function SuccessPage({ data }) {
             <h1>Pedido feito <br /> com sucesso!</h1>
 
             <TextContainer>
-                <div data-test="movie-info"></div>
+                <div data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{seats.movie.title}</p>
                 <p>{seats.day.date} - {seats.name}</p>
+                </div>
             </TextContainer>
 
             <TextContainer>
-                <div data-test="seats-info"></div>
+                <div data-test="seats-info">
                 <strong><p>Ingressos</p></strong>
 
                 {selected.map((e) => (
                 <p key={e.id}>Assento {e.name}</p>
+                
         ))}
+                </div>
             </TextContainer>
 
             <TextContainer>
-                <div data-test="client-info"></div>
+                <div data-test="client-info">
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {name}</p>
                 <p>CPF: {cpf}</p>
+                </div>
             </TextContainer>
 
             <Link to="/">
